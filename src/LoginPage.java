@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +22,7 @@ public class LoginPage implements ActionListener {
 	JPasswordField userPasswordField =new JPasswordField();
 	JLabel userIDlaJLabel=new JLabel("userID");
 	JLabel userPasswordJLabel=new JLabel("Password");
-	JLabel massageLabel =new JLabel("This is a Test");
+	JLabel massageLabel =new JLabel("");
 	
 	
 	
@@ -77,6 +78,39 @@ public class LoginPage implements ActionListener {
 			
 		}
 		
+		if(e.getSource()==logininButton)
+		{
+			//this will retrive the password which is in fields and converts it into to a String
+			String userID =useridField.getText();
+			String password =String.valueOf(userPasswordField.getPassword());
+			
+			
+			//logininfo (it is the name of the HashMap this loop will check weather info is available in hashmap or not
+			if(logininfo.containsKey(userID))
+			{
+				if(logininfo.get(userID).equals(password))
+				  {
+					
+					massageLabel.setForeground(Color.green);
+					massageLabel.setText("Login Successful");
+					frame.dispose();
+					WelcomePage welcomePage =new WelcomePage(userID);
+						
+					}
+				
+				else 
+				{
+					massageLabel.setForeground(Color.red);
+					massageLabel.setText("Incorrect Credintials");
+				}
+			}
+			else {
+				massageLabel.setForeground(Color.red);
+				massageLabel.setText("Username Not Found");
+				
+		}
+			
+												}
 	}
 
 }
